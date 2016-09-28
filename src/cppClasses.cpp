@@ -26,6 +26,60 @@ const Dog operator+(const Dog &lhs, const Dog &rhs)
     return Dog(lhs.name()+"+"+rhs.name());
 }
 
+void passByReference(const Dog &d)
+{
+    cout << d.name() << " at " << &d << " is passed by value\n";
+}
+void passByValue(Dog d)
+{
+    cout << d.name() << " at " << &d << " is passed by reference\n";
+}
+
+const Dog &returnConstByReference(const Dog &d)
+{
+    return d;
+}
+
+Dog returnConstByValue(const Dog &d)
+{
+    return d;
+}
+
+Dog &returnLocalObjectByReference()
+{
+    Dog d("Local");
+    return d;
+}
+
+Dog returnLocalObjectByValue()
+{
+    Dog d("Local");
+    return d;
+}
+
+void foofoo()
+{
+    Dog James("James");
+    passByValue(James);
+    passByReference(James);
+    cout << "\n";
+    Dog Wily("Wily");
+    cout << "Calling returnConstByValue\n";
+    Wily = returnConstByValue(James);  // copy assigned as expected
+    cout << "Calling returnConstByReference\n";
+    Wily = returnConstByReference(James);  //copy assigned as expected
+    cout << "Address of James: " << &James << endl;
+    cout << "Address of Wily: " << &Wily << endl;
+    cout << "Initializing Joe from returnConstByValue with James\n";
+    Dog Joe(returnConstByValue(James));    // copy constructed as expected
+    cout << "Initializing Barbie from returnConstByReference with James\n";
+    Dog Barbie(returnConstByReference(James));  //copy constructed as expected
+    cout << "\n\n\n";
+    Dog e(returnLocalObjectByValue()); //not expected - was expecting copy constructed
+    //Dog d(returnLocalObjectByReference());  // crashes as expected
+    cout << "\n\n\n";
+}
+
 void foo()
 {
     shared_ptr<Dog> p(new Dog("Gunner"));
@@ -64,7 +118,8 @@ int getInt()
 void bar();
 int main()
 {
-    bar();
+    //bar();
+    foofoo();
 }
 
 void bar()
