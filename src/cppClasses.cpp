@@ -7,12 +7,14 @@ using namespace std;
 class Dog {
     string name_;
 public:
-    Dog(string name) { cout << "Dog is created from name: " << name << endl; name_ = name; }
-    Dog(const Dog &d) { cout << "Dog is copy constructed from: " << d.name() << endl; name_ = "Copy constructed of " + d.name(); }
-    Dog& operator=(const Dog &d) { cout << "Dog is copy assigned from: " << d.name() << endl;
-                                   name_ = "Copy assigned of " + d.name();
+    Dog() { cout << "Nameless() dog at: " << this << " created." << endl; name_ = "nameless()"; }
+    Dog(string name) { name_ = "(" + name + ")"; cout << "Dog is created at: " << this << " from name: " << name_ << endl; }
+    Dog(const Dog &d) { name_ = "[Copy constructed of " +
+                d.name() + "]";
+                        cout << "Dog at:" << this << " named " << name_ << " is copy constructed from: " << d.name() << endl;  }
+    Dog& operator=(const Dog &d) { name_ = "{Copy assigned of " + d.name() + "}";
+                                   cout << "Dog " << name_ << " is copy assigned from: " << d.name() << endl;
                                  return *this; }
-    Dog() { cout << "Nameless dog created." << endl; name_ = "nameless"; }
     ~Dog() { cout << "dog is destroyed: " << name_ << endl; }
     void bark() { cout << "Dog " << name_ << " rules!" << endl; }
     inline string name() const { return name_; }
@@ -36,17 +38,20 @@ void foo()
 
 Dog getDog()
 {
-    Dog r;
-    cout << "Address of r: " << &r << endl;
+    Dog r("Joey");
+    cout << "Address of Joey: " << &r << endl;
     return r;
 }
 
 const Dog getDog(const Dog &d)
 {
+    return getDog();
+    /*
     Dog r(d);
     cout << "Address of r: " << &r << endl;
     r.setname("Billy");
     return r;
+    */
 }
 
 int getInt()
@@ -56,7 +61,13 @@ int getInt()
     return r;
 }
 
+void bar();
 int main()
+{
+    bar();
+}
+
+void bar()
 {
     Dog a("a");
     Dog b("b");
@@ -105,6 +116,9 @@ int main()
     cout << "\n\n\n";
     int i = getInt();
     cout << "address of i: " << &i << endl;
+    cout << endl;
+    int ii(getInt());
+    cout << "address of ii: " << &ii << endl;
     cout << endl;
 
     Dog n(getDog()+getDog()); // seems like this syntax n is (initialized?) to the object inside ().  Dog n(x) seem slike &n=&x or maybe *n=*x
