@@ -18,7 +18,7 @@ public:
     ~Dog() { cout << "dog is destroyed: " << name_ << endl; }
     void bark() { cout << "Dog " << name_ << " rules!" << endl; }
     inline string name() const { return name_; }
-    inline void setname(string name) { name_=name; }
+    inline void setname(string name) { cout << name_ << "\'s name is set to " << name << endl; name_=name; }
 };
 
 const Dog operator+(const Dog &lhs, const Dog &rhs)
@@ -116,10 +116,25 @@ int getInt()
 }
 
 void bar();
+void barbar();
+
 int main()
 {
     //bar();
-    foofoo();
+    //foofoo();
+    barbar();
+}
+
+void barbar()
+{
+    Dog Johnny("Johnny");
+    Dog Johnny2(Johnny); // same as Dog Johnny2 = Johnny;
+    Dog &Johnny3(Johnny); // same as Dog &Johnny3 = Johnny;
+    Johnny2.setname("Johnny2");
+    Johnny3.setname("Johnny3");
+    Johnny.bark();
+    Johnny2.bark();
+    Johnny3.bark();
 }
 
 void bar()
