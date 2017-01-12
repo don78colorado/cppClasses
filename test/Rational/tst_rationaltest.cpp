@@ -20,6 +20,8 @@ RationalTest::RationalTest()
 
 void RationalTest::testCase1()
 {
+    QVERIFY(Rational(1,4)!=Rational(3,6));
+    QVERIFY(Rational(1,2)==Rational(3,6));
     Rational oneFourth(1,4);
     Rational result;
     Rational twoFourth(2,4);

@@ -17,6 +17,11 @@ void Rational::setDenominator(int denominator)
     m_denominator = denominator;
 }
 
+double Rational::toDouble() const
+{
+    return m_numerator / (double) m_denominator;
+}
+
 int Rational::numerator() const
 {
     return m_numerator;
@@ -33,13 +38,10 @@ const Rational operator*(const Rational& rhs, const Rational& lhs) {
 
 bool operator==(const Rational &lhs, const Rational &rhs)
 {
-    double first, second;
-    first = lhs.numerator() / (double)lhs.denominator();
-    second = rhs.numerator() / (double)rhs.denominator();
-    return (first==second);
+    return lhs.toDouble() == rhs.toDouble();
 }
 
 bool operator!=(const Rational &rhs, const Rational &lhs)
 {
-    return !(rhs==lhs);
+    return lhs.toDouble() != rhs.toDouble();
 }

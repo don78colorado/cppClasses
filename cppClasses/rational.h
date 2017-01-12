@@ -13,6 +13,8 @@ public:
     void setNumerator(int numerator);
     int denominator() const;
     void setDenominator(int denominator);
+
+    double toDouble() const;
 };
 
 const Rational operator*(const Rational& rhs, const Rational& lhs);
