@@ -17,7 +17,7 @@ public:
     double toDouble() const;
 };
 
-const Rational operator*(const Rational& rhs, const Rational& lhs);
+const Rational operator*(const Rational& lhs, const Rational& rhs);
 bool operator==(const Rational& rhs, const Rational& lhs);
 bool operator!=(const Rational& rhs, const Rational& lhs);
 

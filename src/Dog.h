@@ -46,12 +46,6 @@ Dog returnConstByValue(const Dog &d)
     return d;
 }
 
-Dog &returnLocalObjectByReference()
-{
-    Dog d("Local");
-    return d;
-}
-
 Dog returnLocalObjectByValue()
 {
     Dog d("Local");
@@ -67,13 +61,10 @@ Dog getDog()
 
 const Dog getDog(const Dog &d)
 {
-    return getDog();
-    /*
     Dog r(d);
     cout << "Address of r: " << &r << endl;
     r.setname("Billy");
     return r;
-    */
 }
 
 
